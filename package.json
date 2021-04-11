@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "set NODE_ENV=development&& postcss resources/css/app.css -o public/css/app.css",
+    "prod": "set NODE_ENV=production&& postcss resources/css/app.css -o public/css/app.min.css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "cssnano": "^5.0.0",
+    "postcss": "^8.2.9",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.1"
+  }
+}
