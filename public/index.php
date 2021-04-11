@@ -1,6 +1,10 @@
 <?php
 
 // Charge l'autoloader de composer (dépendances du projet)
+use App\Application;
+use App\Controllers;
+use App\Router;
+
 require '../vendor/autoload.php';
 
 // Charge les variables d'environnements (fichier .env) via DotEnv
@@ -13,8 +17,14 @@ if ($_ENV['DEBUG'] === 'true') {
     ini_set('display_errors', 0);
 }
 
-// Charge le router et sa liste de routes
-$router = new \App\Router();
-$router->get('/', function () { return __DIR__; });
-$router->run();
+// Instance de l'application
+$app = new Application(
+    new Router()
+);
+
+// Définition des routes
+$app->router->get('/', [Controllers\GameController::class, 'index']);
+
+// Lancement du routeur
+$app->router->run();
 
