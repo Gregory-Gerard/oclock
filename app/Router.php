@@ -110,6 +110,18 @@ class Router
     }
 
     /**
+     * Génère une url absolue à partir d'une url relative
+     *
+     * @param string $relativeUrl
+     *
+     * @return string
+     */
+    public function url(string $relativeUrl): string
+    {
+        return $this->baseUrl.'/'.trim($relativeUrl);
+    }
+
+    /**
      * Fonction qui exécute l'action d'une route
      *
      * @param array|Closure $action
