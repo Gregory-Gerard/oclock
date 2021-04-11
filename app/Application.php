@@ -14,9 +14,10 @@ class Application
     protected static Application $instance;
     public Router $router;
 
-    public function __construct(Router $router)
+    public function __construct(Router $router = null)
     {
-        $this->router = $router;
+        if ($router !== null) $this->router = $router;
+        else $this->router = new Router();
 
         static::setInstance($this);
     }
@@ -28,6 +29,11 @@ class Application
 
     public static function getInstance(): Application
     {
+
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
+        }
+
         return static::$instance;
     }
 }
