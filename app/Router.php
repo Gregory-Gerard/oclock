@@ -95,7 +95,6 @@ class Router
      */
     public function run()
     {
-        $currentMethod = $_SERVER['REQUEST_METHOD'];
         $foundRoute = null;
 
         foreach (($this->routes[$_SERVER['REQUEST_METHOD']] ?? []) as $route) {
