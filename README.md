@@ -1,2 +1,2 @@
-# oclock
-Test O'clock
+# O'clock
+Voir `./test.pdf` pour les consignes !
