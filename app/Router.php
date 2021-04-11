@@ -122,7 +122,7 @@ class Router
         if (($action instanceof Closure)) {
             $this->output($action());
         } elseif (is_array($action) && count($action) === 2 && method_exists($action[0], $action[1])) {
-            echo 'contrôleur';
+            $this->output(call_user_func([new $action[0], $action[1]]));
         } else {
             throw new RouterException('Action impossible à exécuter');
         }
