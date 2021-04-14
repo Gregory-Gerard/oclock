@@ -21,6 +21,8 @@ Voici le "stack" de l'application que j'ai réalisée :
 * Du JS vanilla
 * Une BDD MySQL
 
+_⚠️ Compatibilité avec les navigateurs "récents" seulement ! Je n'ai pas utilisé babel ou autre pour éviter d'encore plus complexifier 😊_
+
 Évidemment, tout ça pour un projet pareil est un peu "overkill", mais à but éducatif je pense qu'il peut introduire des grosses bases sur un stack classique du web :)
 
 _Petite précision, je n'ai pas pu utiliser les images fournies car elles n'étaient pas transparentes :(_
