@@ -31236,6 +31236,102 @@ video {
   }
 }
 
+@-webkit-keyframes flipIn {
+  from, 40%, 60%, 80%, to {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+  }
+
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, 180deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 1;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+@keyframes flipIn {
+  from, 40%, 60%, 80%, to {
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+  }
+
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, 180deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+            animation-timing-function: ease-in;
+    opacity: 1;
+  }
+
+  60% {
+    transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
+  }
+
+  80% {
+    transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
+  }
+
+  to {
+    transform: perspective(400px);
+  }
+}
+
+@-webkit-keyframes flipOut {
+  from, 40%, 60%, 80%, to {
+    -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+  }
+
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+  }
+
+  to {
+    transform: perspective(400px) rotate3d(0, 1, 0, 180deg);
+  }
+}
+
+@keyframes flipOut {
+  from, 40%, 60%, 80%, to {
+    -webkit-backface-visibility: visible;
+            backface-visibility: visible;
+  }
+
+  from {
+    transform: perspective(400px) rotate3d(0, 1, 0, -15deg);
+  }
+
+  to {
+    transform: perspective(400px) rotate3d(0, 1, 0, 180deg);
+  }
+}
+
 .animate-none {
   -webkit-animation: none;
           animation: none;
@@ -31264,6 +31360,16 @@ video {
 .animate-bounceIn {
   -webkit-animation: bounceIn 0.75s;
           animation: bounceIn 0.75s;
+}
+
+.animate-flipIn {
+  -webkit-animation: flipIn 0.75s;
+          animation: flipIn 0.75s;
+}
+
+.animate-flipOut {
+  -webkit-animation: flipOut 0.5s;
+          animation: flipOut 0.5s;
 }
 
 .mix-blend-normal {
@@ -62473,6 +62579,16 @@ video {
             animation: bounceIn 0.75s;
   }
 
+  .sm\:animate-flipIn {
+    -webkit-animation: flipIn 0.75s;
+            animation: flipIn 0.75s;
+  }
+
+  .sm\:animate-flipOut {
+    -webkit-animation: flipOut 0.5s;
+            animation: flipOut 0.5s;
+  }
+
   .sm\:mix-blend-normal {
     mix-blend-mode: normal;
   }
@@ -93587,6 +93703,16 @@ video {
   .md\:animate-bounceIn {
     -webkit-animation: bounceIn 0.75s;
             animation: bounceIn 0.75s;
+  }
+
+  .md\:animate-flipIn {
+    -webkit-animation: flipIn 0.75s;
+            animation: flipIn 0.75s;
+  }
+
+  .md\:animate-flipOut {
+    -webkit-animation: flipOut 0.5s;
+            animation: flipOut 0.5s;
   }
 
   .md\:mix-blend-normal {
@@ -124705,6 +124831,16 @@ video {
             animation: bounceIn 0.75s;
   }
 
+  .lg\:animate-flipIn {
+    -webkit-animation: flipIn 0.75s;
+            animation: flipIn 0.75s;
+  }
+
+  .lg\:animate-flipOut {
+    -webkit-animation: flipOut 0.5s;
+            animation: flipOut 0.5s;
+  }
+
   .lg\:mix-blend-normal {
     mix-blend-mode: normal;
   }
@@ -155821,6 +155957,16 @@ video {
             animation: bounceIn 0.75s;
   }
 
+  .xl\:animate-flipIn {
+    -webkit-animation: flipIn 0.75s;
+            animation: flipIn 0.75s;
+  }
+
+  .xl\:animate-flipOut {
+    -webkit-animation: flipOut 0.5s;
+            animation: flipOut 0.5s;
+  }
+
   .xl\:mix-blend-normal {
     mix-blend-mode: normal;
   }
@@ -186935,6 +187081,16 @@ video {
   .\32xl\:animate-bounceIn {
     -webkit-animation: bounceIn 0.75s;
             animation: bounceIn 0.75s;
+  }
+
+  .\32xl\:animate-flipIn {
+    -webkit-animation: flipIn 0.75s;
+            animation: flipIn 0.75s;
+  }
+
+  .\32xl\:animate-flipOut {
+    -webkit-animation: flipOut 0.5s;
+            animation: flipOut 0.5s;
   }
 
   .\32xl\:mix-blend-normal {

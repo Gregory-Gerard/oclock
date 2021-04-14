@@ -10,7 +10,12 @@
     <main class="w-full">
         <h1 class="text-4xl font-bold mb-8">Memory 🔮</h1>
 
-        <div class="grid grid-rows-4 grid-cols-4 gap-4 w-96 h-96 mx-auto p-4 rounded shadow-md bg-gray-900" id="game"></div>
+        <div class="mx-auto w-96 h-96" id="game">
+            <div class="flex mb-2">
+                <p>Tentative : <span id="match">0</span></p>
+            </div>
+            <div class="grid grid-rows-4 grid-cols-4 gap-4 w-full h-full p-4 rounded shadow-md bg-gray-900"></div>
+        </div>
     </main>
 
     <script src="<?= $_ENV['DEBUG'] === 'true' ? router()->url('js/app.js?v=').uniqid() : router()->url('css/app.js') ?>"></script>

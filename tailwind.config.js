@@ -30,10 +30,47 @@ module.exports = {
             opacity: 1,
             transform: 'scaleX(1)'
           },
+        },
+        flipIn: {
+          'from, 40%, 60%, 80%, to': {
+            'backface-visibility': 'hidden'
+          },
+          'from': {
+            'transform': 'perspective(400px) rotate3d(0, 1, 0, 180deg)',
+            'animation-timing-function': 'ease-in',
+            'opacity': 0
+          },
+          '40%': {
+            'transform': 'perspective(400px) rotate3d(0, 1, 0, -20deg)',
+            'animation-timing-function': 'ease-in',
+            'opacity': 1
+          },
+          '60%': {
+            'transform': 'perspective(400px) rotate3d(0, 1, 0, 10deg)',
+          },
+          '80%': {
+            'transform': 'perspective(400px) rotate3d(0, 1, 0, -5deg)'
+          },
+          'to': {
+            'transform': 'perspective(400px)'
+          }
+        },
+        flipOut: {
+          'from, 40%, 60%, 80%, to': {
+            'backface-visibility': 'visible'
+          },
+          'from': {
+            'transform': 'perspective(400px) rotate3d(0, 1, 0, -15deg)',
+          },
+          'to': {
+            'transform': 'perspective(400px) rotate3d(0, 1, 0, 180deg)',
+          }
         }
       },
       animation: {
         bounceIn: 'bounceIn 0.75s',
+        flipIn: 'flipIn 0.75s',
+        flipOut: 'flipOut 0.5s',
       }
     },
   },
