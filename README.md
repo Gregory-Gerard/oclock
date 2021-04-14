@@ -26,6 +26,8 @@ Voici le "stack" de l'application que j'ai réalisée :
 _Petite précision, je n'ai pas pu utiliser les images fournies car elles n'étaient pas transparentes :(_
 
 ## Résultat
-Voici un petit déploiement sur une instance de Scaleway : [https://oclock.gregory-gerard.dev](https://oclock.gregory-gerard.dev) _(en cours, déploiement en local possible en attendant avec composer install, lancer le fichier sql pour migrer la base, puis naviguer vers localhost/oclock/public)_
+Voici un petit déploiement sur une instance de Scaleway : [https://oclock.gregory-gerard.dev](https://oclock.gregory-gerard.dev)
+
+Stack : LAMP, HTTPS (obligatoire avec un .dev toute façon)
 
 ## Merci :)
