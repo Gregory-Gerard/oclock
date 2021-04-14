@@ -22,9 +22,17 @@ $app = new Application(
     new Router()
 );
 
-// Définition des routes
-$app->router->get('/', [Controllers\GameController::class, 'index']);
+try {
+    // Définition des routes
+    $app->router->get('/', [Controllers\GameController::class, 'index']);
+    $app->router->post('/bravo', [Controllers\GameController::class, 'store']);
+    $app->router->get('/best', [Controllers\GameController::class, 'show']);
 
-// Lancement du routeur
-$app->router->run();
+    // Lancement du routeur
+    $app->router->run();
+} catch (\App\Exceptions\NotFoundException $e) {
+    http_response_code(404);
+} catch (\Exception $e) {
+    http_response_code(500);
+}
 

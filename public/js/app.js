@@ -7,12 +7,25 @@ class App {
     gridWidthHeight = 4;
 
     /**
+     * Temps de jeu au démarrage
+     *
+     * @type {number}
+     */
+    maxTime = 90;
+
+    /**
+     * Temps de jeu restant
+     *
+     * @type {number}
+     */
+    time;
+
+    /**
      * Liste des cartes disponibles pour jouer
-     * (j'avoue certaines je n'ai pas su reconnaître...)
      *
      * @type {array}
      */
-    cardsAvailableType = ['apple', 'banana', 'orange', 'lime', 'pomegranate', 'lemon', 'strawberry', 'watermelon', 'cherry', 'grape', 'apricot', 'peach'];
+    cardsAvailableType = ['apple', 'banana', 'orange', 'lemon', 'strawberry', 'watermelon', 'cherry', 'grape', 'peach', 'mango', 'kiwi', 'pear'];
 
     /**
      * Liste des cartes sélectionnées pour l'instance de jeu
@@ -75,7 +88,10 @@ class App {
 
         // kage bunshin no jutsu
         this.cardsSelectedType.forEach((card, i) => {
-            this.gameEl.querySelector('.grid').appendChild(this.html(`<div class="card rounded shadow-md p-4 bg-gray-800 cursor-pointer animate-bounceIn transition-colors" data-id="${i}"><span></span></div>`));
+            this.gameEl.querySelector('.grid').appendChild(this.html(`
+                <div class="card flex justify-center items-center rounded shadow-md p-4 bg-gray-800 cursor-pointer animate-bounceIn transition-colors" data-id="${i}">
+                    <span role="img" aria-hidden="true"></span>
+                </div>`));
 
             this.cards[i] = {
                 el: this.gameEl.querySelector(`.card[data-id="${i}"]`), // on utilise pas le résultat d'appendChild car il renvoie un DocumentFragment vide,
@@ -84,7 +100,20 @@ class App {
             };
         });
 
+        this.time = this.maxTime;
+
+        // affiche le temps restant de base
+        this.gameEl.querySelector('#progress-time').textContent = `${Math.floor(this.time/60)}:${(this.time%60).toString().padStart(2, '0')}`;
+
         this.initListeners();
+    }
+
+    /**
+     * Démarrage
+     */
+    start() {
+        this.gameEl.querySelector('#game__start').remove();
+        this.initTimer();
     }
 
     /**
@@ -116,8 +145,10 @@ class App {
      * @param card Carte à sélectionner
      */
     firstChoiceCard(card) {
-        // affichage du fruit
-        card.el.querySelector('span').textContent = card.type;
+        // affichage du fruit (en prenant en compte l'accessibilité)
+        card.el.querySelector('span').classList.add(`card--${card.type}`);
+        card.el.querySelector('span').setAttribute('aria-hidden', 'false');
+        card.el.querySelector('span').setAttribute('aria-label', card.type);
 
         // animation
         card.el.classList.remove('bg-gray-800', 'cursor-pointer');
@@ -138,8 +169,10 @@ class App {
         this.cards[this.cardSelected.el.dataset.id].disabled = true;
         this.cards[card.el.dataset.id].disabled = true;
 
-        // affichage du fruit
-        card.el.querySelector('span').textContent = card.type;
+        // affichage du fruit (en prenant en compte l'accessibilité)
+        card.el.querySelector('span').classList.add(`card--${card.type}`);
+        card.el.querySelector('span').setAttribute('aria-hidden', 'false');
+        card.el.querySelector('span').setAttribute('aria-label', card.type);
 
         // animation
         this.cardSelected.el.classList.remove('bg-gray-700');
@@ -154,7 +187,7 @@ class App {
         // reset carte sélectionnée
         this.cardSelected = null;
 
-        if (this.matches === this.gridWidthHeight**2) setTimeout(() => alert("c'est la win"), 250);
+        if (this.matches === this.gridWidthHeight**2) setTimeout(() => this.win(), 250);
     }
 
     /**
@@ -169,8 +202,10 @@ class App {
 
         const firstChoice = this.cardSelected;
 
-        // affichage du fruit
-        card.el.querySelector('span').textContent = card.type;
+        // affichage du fruit (en prenant en compte l'accessibilité)
+        card.el.querySelector('span').classList.add(`card--${card.type}`);
+        card.el.querySelector('span').setAttribute('aria-hidden', 'false');
+        card.el.querySelector('span').setAttribute('aria-label', card.type);
 
         // animation
         firstChoice.el.classList.remove('bg-gray-700');
@@ -179,19 +214,20 @@ class App {
         card.el.classList.add(card.type, 'animate-flipIn', 'bg-red-900');
 
         setTimeout(() => {
-            firstChoice.el.classList.remove(firstChoice.type, 'bg-red-900', 'animate-flipIn');
-            firstChoice.el.classList.add('bg-gray-800', 'cursor-pointer', 'animate-flipOut');
-            firstChoice.el.querySelector('span').textContent = '';
-            card.el.classList.remove(card.type, 'bg-red-900', 'animate-flipIn');
-            card.el.classList.add('bg-gray-800', 'cursor-pointer', 'animate-flipOut');
-            card.el.querySelector('span').textContent = '';
-
-            this.blocked = false;
+            [firstChoice, card].forEach(cardToHide => {
+                cardToHide.el.classList.remove(cardToHide.type, 'bg-red-900', 'animate-flipIn');
+                cardToHide.el.classList.add('bg-gray-800', 'cursor-pointer', 'animate-flipOut');
+                cardToHide.el.querySelector('span').classList.remove(`card--${cardToHide.type}`);
+                cardToHide.el.querySelector('span').setAttribute('aria-hidden', 'true');
+                cardToHide.el.querySelector('span').setAttribute('aria-label', '');
+            })
 
             setTimeout(() => {
+                this.blocked = false;
+
                 firstChoice.el.classList.remove('animate-flipOut');
                 card.el.classList.remove('animate-flipOut');
-            }, 750)
+            }, 500)
         }, 1000);
 
         // maj compteurs
@@ -206,16 +242,74 @@ class App {
      */
     incrementTries() {
         this.tries++;
-        this.gameEl.querySelector('#match').textContent = this.tries.toString();
+    }
+
+    /**
+     * C'est gagné
+     */
+    win() {
+        this.blocked = true;
+
+        // le temps mis pour gagner
+        const time = `${Math.floor((this.maxTime-this.time)/60)}:${((this.maxTime-this.time)%60).toString().padStart(2, '0')}`;
+        alert(`Et c'est gagné 🤩 En ${this.tries} coups et un temps de ${time}`);
+
+        fetch("bravo", {"headers":{"content-type":"application/x-www-form-urlencoded; charset=UTF-8"},"body":`tries=${this.tries}&time=${time}`,"method":"POST"})
+            .then(() => location.reload());
+    }
+
+    /**
+     * C'est perdu
+     */
+    lose() {
+        this.blocked = true;
+        alert("Et c'est perdu 😥 Retente ta chance !");
+        location.reload();
+    }
+
+    /**
+     * Affiche les meilleurs temps
+     */
+    showBestTimes()
+    {
+        fetch('best')
+            .then(response => response.json())
+            .then(response => {
+                alert(`Classement des meilleurs temps :\n${response.message.map(entry => `🏆 ${entry.time} (en ${entry.tries} tentatives)`).join('\n')}`);
+            })
     }
 
     /**
      * Les écouteurs d'événements
      */
     initListeners() {
+        this.gameEl.querySelector('#game__start button').addEventListener('click', () => this.start());
+
+        this.gameEl.querySelector('#game__top').addEventListener('click', () => this.showBestTimes());
+
         this.gameEl.querySelectorAll('.card').forEach(el =>
                 el.addEventListener('click', (e) => this.eventCardClick(e))
         );
+    }
+
+    /**
+     * Le timer du jeu
+     */
+    initTimer() {
+        const timer = setInterval(() => {
+            if (this.time <= 0) {
+                clearInterval(timer); // supprime le setInterval, on en a plus besoin !
+                this.lose();
+                return;
+            }
+
+            this.time--;
+
+            const percentage = Math.floor(this.time*100/this.maxTime);
+
+            this.gameEl.querySelector('#progress-bar div').style.width = `${percentage}%`;
+            this.gameEl.querySelector('#progress-time').textContent = `${Math.floor(this.time/60)}:${(this.time%60).toString().padStart(2, '0')}`;
+        }, 1000);
     }
 
     /**

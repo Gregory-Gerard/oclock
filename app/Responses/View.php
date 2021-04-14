@@ -6,6 +6,11 @@ namespace App\Responses;
 
 use App\Exceptions\ViewException;
 
+/**
+ * Une view est une page complète (html) renvoyée à l'utilisateur
+ *
+ * @package App\Responses
+ */
 class View implements Response
 {
     /**
@@ -14,7 +19,7 @@ class View implements Response
     private const VIEW_FOLDER = __DIR__.'/../../resources/views';
 
     /**
-     * Chemin complet de la vue
+     * @var string Chemin complet de la vue
      */
     private string $fullPath = '';
 

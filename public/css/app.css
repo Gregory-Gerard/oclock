@@ -587,6 +587,49 @@ video {
   }
 }
 
+.btn {
+  --tw-bg-opacity: 1;
+  background-color: rgba(139, 92, 246, var(--tw-bg-opacity));
+}
+
+.btn:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(109, 40, 217, var(--tw-bg-opacity));
+}
+
+.btn {
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.btn:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.btn {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.btn:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(167, 139, 250, var(--tw-ring-opacity));
+  --tw-ring-opacity: 0.75;
+}
+
+.btn {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
@@ -32006,6 +32049,70 @@ video {
 
 .backdrop-sepia {
   --tw-backdrop-sepia: sepia(100%);
+}
+
+/* Hors purge */
+
+body {
+  min-height: 600px;
+}
+
+.card--apple::before, .card--banana::before, .card--orange::before, .card--lemon::before, .card--strawberry::before, .card--watermelon::before,
+.card--cherry::before, .card--grape::before, .card--peach::before, .card--mango::before, .card--kiwi::before, .card--pear::before{
+  text-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.card--apple::before, .card--banana::before, .card--orange::before, .card--lemon::before, .card--strawberry::before, .card--watermelon::before, .card--cherry::before, .card--grape::before, .card--peach::before, .card--mango::before, .card--kiwi::before, .card--pear::before {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.card--apple::before {
+  content: '🍎';
+}
+
+.card--banana::before {
+  content: '🍌';
+}
+
+.card--orange::before {
+  content: '🍊';
+}
+
+.card--lemon::before {
+  content: '🍋';
+}
+
+.card--strawberry::before {
+  content: '🍓';
+}
+
+.card--watermelon::before {
+  content: '🍉';
+}
+
+.card--cherry::before {
+  content: '🍒';
+}
+
+.card--grape::before {
+  content: '🍇';
+}
+
+.card--peach::before {
+  content: '🍑';
+}
+
+.card--mango::before {
+  content: '🥭';
+}
+
+.card--kiwi::before {
+  content: '🥝';
+}
+
+.card--pear::before {
+  content: '🍐';
 }
 
 @media (min-width: 640px) {
@@ -187637,3 +187744,4 @@ video {
     --tw-backdrop-sepia: sepia(100%);
   }
 }
+

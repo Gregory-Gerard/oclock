@@ -3,6 +3,7 @@ module.exports = {
     './resources/**/*.html',
     './resources/**/*.php',
     './resources/**/*.js',
+    './public/**/*.js',
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
