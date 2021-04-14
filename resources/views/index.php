@@ -8,10 +8,10 @@
     <link href="<?= $_ENV['DEBUG'] === 'true' ? router()->url('css/app.css') : router()->url('css/app.min.css') ?>" rel="stylesheet">
 </head>
 <body class="flex items-center text-center h-screen min-h bg-gradient-to-br from-gray-900 to-black bg-fixed text-white">
-    <main class="w-full">
+    <main class="w-full px-4">
         <h1 class="text-4xl font-bold mb-8">Memory 🔮</h1>
 
-        <div class="relative mx-auto w-96" id="game">
+        <div class="relative mx-auto lg:w-96 w-full " id="game">
             <div class="grid grid-rows-4 grid-cols-4 gap-4 w-full h-96 p-4 rounded overflow-hidden shadow-md bg-gray-900">
                 <div id="game__start" class="absolute flex flex-col justify-center items-center w-full h-96 top-0 left-0 bg-gray-900 bg-opacity-75 z-10">
                     <button class="btn">
