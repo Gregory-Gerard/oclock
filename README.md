@@ -33,3 +33,11 @@ Voici un petit déploiement sur une instance de Scaleway : [https://oclock.grego
 Stack : LAMP, HTTPS (obligatoire avec un .dev toute façon)
 
 ## Merci :)
+
+```
++-----------+-----------------+------------+
+| avg_tries | avg_time        | count      |
++-----------+-----------------+------------+
+|   17.5743 | 00:00:36.435643 |        101 |
++-----------+-----------------+------------+
+```
